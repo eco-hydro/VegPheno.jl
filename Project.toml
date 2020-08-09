@@ -1,0 +1,11 @@
+name = "phenofit"
+uuid = "123bb0d4-1547-4711-8eb7-d4247b1bccc6"
+authors = ["Dongdong Kong <kongdd@users.noreply.github.com>"]
+version = "0.1.0"
+
+[deps]
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Libdl = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+NetCDF = "30363a11-5582-574a-97bb-aa9a979735b9"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

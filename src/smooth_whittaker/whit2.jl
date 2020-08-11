@@ -1,6 +1,10 @@
 """
 Second-order differences Whittaker-Henderson smoothing
 
+whit2(y, w, lambda)
+whit2(y, w, lambda, z)
+whit2(y, w, lambda, z, c, d, e)
+
 # Citation
 'Smoothing and interpolation with finite differences' [Eilers P. H. C, 1994]
 (URL: http://dl.acm.org/citation.cfm?id=180916)

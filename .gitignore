@@ -7,8 +7,12 @@
 # data
 *.csv
 # *.rda
+*.jld
+*.jld2
 
 # Figures
 *.tif
 *.gif
+*.png
 *.pdf
+Figures/

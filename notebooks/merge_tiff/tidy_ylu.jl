@@ -1,7 +1,7 @@
 using ArchGDAL
 using NetCDF
-include("MODIS.jl")
-include("main_ylu.jl")
+# include("MODIS.jl")
+# include("main_ylu.jl")
 
 infile = "/mnt/n/MODIS/Terra_LAI_ylu_2002-2019.tif"
 # infile = "/mnt/c/Program Files/MATLAB/R2018b/toolbox/images/imdata/AT3_1m4_07.tif"

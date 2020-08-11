@@ -27,18 +27,18 @@ function qc_FparLai(QA; wmin = 0.2, wmid = 0.5, wmax = 1.0)
 
     level_names_r = ["good", "marginal", "snow", "cloud", "aerosol", "shadow"]
     QC_flag = ones(Int8, n)
-    w = ones(Float32, n) # default is zero
+    w = ones(Float32, n) .* wmax # default is zero
 
-    QC_flag[getBits(QA, 2) .== Int(1)] .= Int8(3) # "snow"
-    QC_flag[getBits(QA, 5) .== Int(1)] .= Int8(4) # "cloud"
     QC_flag[getBits(QA, 3) .== Int(1)] .= Int8(5) # "aerosol"
     QC_flag[getBits(QA, 6) .== Int(1)] .= Int8(6) # "shadow"
+    QC_flag[getBits(QA, 5) .== Int(1)] .= Int8(4) # "cloud"
+    QC_flag[getBits(QA, 2) .== Int(1)] .= Int8(3) # "snow"
     
-    is_good(x) = x in Int8[2, 3, 4, 5, 6]
+    # is_good(x) = !in(x, Int8[2, 3, 4, 5, 6])
     is_bad(x) = x in Int8[3, 4, 6]
     # w[in.(QC_flag, )] .= wmin
     w[is_bad.(QC_flag)] .= wmin
-    w[QC_flag .= Int8(5)] .= wmid
+    w[QC_flag .== Int8(5)] .= wmid
     
     (w, QC_flag)
 end

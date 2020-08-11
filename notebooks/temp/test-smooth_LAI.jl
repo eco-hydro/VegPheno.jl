@@ -4,7 +4,7 @@ using BenchmarkTools
 using Plots
 gr()
 
-include("main_ylu.jl")
+# include("main_ylu.jl")
 
 indir = "/mnt/n/MODIS/Terra_LAI_nc/"
 files = glob("*2_3.nc", indir)

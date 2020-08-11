@@ -12,17 +12,22 @@ export  whittaker2,
         # whittaker1,
         # whittaker1!,
 
-include("smooth_whittaker/whit2.jl")
-include("smooth_whittaker/whit2_cpp.jl")
-include("smooth_whittaker/whittaker2.jl")
-
-include("weights/wBisquare.jl")
-include("weights/wTSM.jl")
+include("base/main_Ipaper.jl")
 
 include("raster/raster.jl")
 include("raster/ncread2.jl")
 
 include("QC/qc_FparLai.jl")
-include("base/main_Ipaper.jl")
+
+include("smooth_whittaker/whit2_cpp.jl")
+include("smooth_whittaker/whittaker2.jl")
+include("smooth_whittaker/whit2.jl")
+include("curvefit/v_curve.jl")
+include("curvefit/plot_input.jl")
+
+include("weights/wBisquare.jl")
+include("weights/wTSM.jl")
+
+include("curvefit/spike.jl")
 
 end

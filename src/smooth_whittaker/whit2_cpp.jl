@@ -9,7 +9,8 @@ prefix = abspath("../deps/smooth_whit")
 # prefix = "./nlminb"
 
 # $(Libdl.dlext)
-const libpath = "$(prefix).$(Libdl.dlext)"
+# $(Libdl.dlext)
+const libpath = "$(prefix).so"
 
 """
 Whittaker in c version

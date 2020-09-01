@@ -1,15 +1,15 @@
 using Glob
+using Dates
 
 # x and y is equal length at here
+# - `I_y`: which y is corresponding to current x[i]
 function match2(x, y)
-    I_x = ones(Int, length(x))
-    I_y = ones(Int, length(y))
+    I_y = ones(Int, length(x))
     for i in 1:length(x)
         I_y[i] = findfirst(x[i] .== y)
-        I_x[i] = findfirst(y[i] .== x)
+        # I_x[i] = findfirst(y[i] .== x)
     end
-    
-    I_x, I_y
+    I_y # 
 end
 
 # function match2(x, y)
@@ -75,5 +75,6 @@ end
 #     [pdffile.savefig(f) for f in figures] # add figures to file
 #     pdffile.close() # close pdf file    
 # end
+get_dn(date, days = 8) = fld.(Dates.dayofyear.(date) .- 1, days) .+ 1
 
-export match2, split, str_extract, list_dir, CartesianIndex2Int, merge_pdf
+export match2, split, str_extract, list_dir, CartesianIndex2Int, merge_pdf, get_dn

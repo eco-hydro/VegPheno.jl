@@ -2,15 +2,17 @@ using NetCDF
 using Glob
 using BenchmarkTools
 # using RCall
-using Revise
+# using Revise
 using phenofit
 using FileIO
+using Printf
 
 # include("main_ylu.jl")
 include("main_phenofit.jl")
 # ------------------------------------------------------------------------------
 indir = "/mnt/n/MODIS/Terra_LAI_nc/"
 files = glob("*2_3.nc", indir)
+
 # file = files[1]
 # @time data_A = resample(ylu_A);
 # perc = sum(data_A .> 0.1)/length(data_A) # 52.1%
@@ -48,29 +50,32 @@ end
 # using RCall
 # lst = map(i -> (get_LAI(ind[i]), get_QC(ind[i])), 1:4)
 # l = lst[1]
-ind = 1:20
+ind  = 1:20
 date = get_LAI_date()
 
+## should be able to calculate drought
+
 using Plots
-pyplot()
+# pyplot()
 # gr()
 
 nptperyear = 46
 is_plot    = true
-niters     = 3
-lambda     = 0.5
+niters     = 5
+# lambda     = 0.5
 
 # plotly()
+using Plots
 pyplot()
 @time for i in 1:length(lst)    
-    # println(i)
+    println(i)
     # if i != 2; continue; end
     # if i > 1; break; end
-    global w
     # i = 1
-    # begin
+# begin
     l = lst[i]
-    y = l[1]*1.0
+    global y = l[1]*1.0
+    global w
     qc = l[2]
     w, QC_flag = qc_FparLai(qc, wmid = 0.5, wmax = 0.8)
 
@@ -81,30 +86,38 @@ pyplot()
     xticks = @. Date(year_min:year_max, 1, 1)
 
     p = plot_input(date, y, QC_flag, (2000, year_max))
-    spike_rm!(y, 0.3, x = date, p = p, QC_flag = QC_flag)
+    spike_rm!(y, 0.3, x = date, p = p, QC_flag = QC_flag, half_win = 1)
     
-    # my_cgrad = cgrad([:blue, "yellow", :red])
-    plot!(p, xlim = x_lims, legend = :topleft)
+    my_cgrad = cgrad([:blue, "yellow", :red])
+    plot!(p, xlim = x_lims, legend = :topleft, 
+        title = "i = $i",
+        size = (1200, 260), palette = my_cgrad)
 
     ## add curve fitting results into spike.pdf 
     # "#7F7F7F"
     colors = ["#0000FF" "#FFFF00" "#FF7F00" "#FF0000"]
     p_w = plot(date, w, xlim = x_lims, frame = :box, xticks = xticks)
+
+    # println(w)
     for i in 1:niters
         # println("outside y: ", sum(y))
-        yfit = whit2(y, w, lambda)
+        # lambda = lambda_vcurve(y, w, is_plot = false)
+        lambda = lambda_cv(y, w, is_plot = false)
+        yfit, cve = whit2(y, w, lambda)
+        
         global w = wBisquare(y, yfit, w, QC_flag, iter = i, wmin = 0.1, step = 0.3)
         if is_plot
-            plot!(p, date, yfit, color = colors[i], linewidth = 0.8, label = "iter $i")
-            plot!(p_w, date, w, color = colors[i], lw = 0.5, label = "iter $i")
+            # , color = colors[i]
+            plot!(p, date, yfit, linewidth = 0.8, label = "iter $i")
+            # plot!(p_w, date, w, lw = 0.5, label = "iter $i")
         end
     end
-    
     ## 3. add subplot
-    plot(p, p_w, layout = @layout [a ; b], size = (1200, 480))
-    savefig("Figures/spike_$i.pdf")
+    # plot(p, p_w, layout = (2, 1), size = (1200, 480))
+    outfile = @sprintf("Figures/spikeV2_%02d.pdf", i)
+    savefig(outfile)
 end
-merge_pdf("Figures/*.pdf", "Plot.pdf")
+merge_pdf("Figures/*.pdf", "Spike (dynamic-lambda) V7.pdf")
 
 
 begin

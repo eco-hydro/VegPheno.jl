@@ -1,16 +1,19 @@
 
 
-doy = Dates.dayofyear.(date)
-dn = fld.(doy .- 1, 8) .+ 1
-
-grps = unique(dn)
-n = length(grps)
-out = zeros(n)
-for i = 1:length(grps)
-    ind = dn .== grps[i]
-    out[i] = mean(y[ind])
+"""
+dn = get_dn(date, 8)
+y_his = interp_hisavg(y, dn)
+"""
+function interp_hisavg(y, flag)
+    grps = unique(flag) |> sort
+    n = length(grps)
+    out = zeros(n)
+    @inbounds for i = 1:length(grps)
+        out[i] = mean(y[flag .== grps[i]])
+    end
+    I = match2(flag, grps)
+    out[I]
 end
 
 ## stop at here
 # I need a historical average
-I_x, I_y = match2(dn, grps)

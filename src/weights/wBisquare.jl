@@ -12,11 +12,13 @@ wBisquare(y, yfit, w; iter = 2, wmin, to_upper = true)
 - 1. under the yfit, in the growing season (yfit > 0.3 * A + ymin)
 - 2. 
 """
-function wBisquare(y::Array{T,1}, yfit::Array{T,1}, w::Array{T2,1}, QC_flag;
-                   iter::Integer = 2, 
-                   wmin::Float64 = 0.05, 
-                   step::Float64 = 0.2, 
-                   to_upper = true) where {T <: AbstractFloat, T2 <: AbstractFloat}
+function wBisquare(y::Array{T,1}, yfit::Array{T,1}, w::Array{T2,1};
+    # QC_flag;
+    iter::Integer = 2, 
+    wmin::Float64 = 0.05, 
+    step::Float64 = 0.2, 
+    to_upper = true) where {T <: AbstractFloat, T2 <: AbstractFloat}
+
     n = length(y)
 
     ymax = maximum(yfit)

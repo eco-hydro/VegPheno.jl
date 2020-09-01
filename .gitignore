@@ -16,3 +16,6 @@
 *.png
 *.pdf
 Figures/
+
+*.md
+*.docx

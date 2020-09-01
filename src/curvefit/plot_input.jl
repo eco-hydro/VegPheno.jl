@@ -25,8 +25,6 @@ function plot_input(date, val, QC_flag, year_lims = (2000, 2010); base_size = 4.
         # title = "hello",
         color = "black",
         framestyle = :box)
-    
-    # plot(date, val)
     # plot!(xlim = [Date(2000), Date(2006)])
     
     for i = 1:6

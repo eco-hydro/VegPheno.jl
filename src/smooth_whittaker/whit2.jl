@@ -9,7 +9,7 @@ whit2(y, w, lambda, z, c, d, e)
 'Smoothing and interpolation with finite differences' [Eilers P. H. C, 1994]
 (URL: http://dl.acm.org/citation.cfm?id=180916)
 """
-function whit2(y::Array{T,1}, w::Array{T2,1}, lambda::Float64) where{
+function whit2(y::Array{T,1}, w::Array{T2,1}, lambda::Float64; include_cve = true) where{
     T <: Real, T2 <: Real }
 
     m = length(y)
@@ -17,22 +17,25 @@ function whit2(y::Array{T,1}, w::Array{T2,1}, lambda::Float64) where{
     c = zeros(Float32, m)
     d = zeros(Float32, m)
     e = zeros(Float32, m)
-    whit2!(y, w, lambda, z, c, d, e)
-    return z
+    cve = whit2!(y, w, lambda, z, c, d, e, include_cve = include_cve)
+    z, cve
+    # return z
 end
 
-function whit2(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1}) where{
+function whit2(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1}; include_cve = true) where{
     T <: Real, T2 <: Real }
 
     m = length(y)
     c = zeros(Float32, m)
     d = zeros(Float32, m)
     e = zeros(Float32, m)
-    whit2!(y, w, lambda, z, c, d, e)
+    cve = whit2!(y, w, lambda, z, c, d, e, include_cve = include_cve)
+    z, cve
 end
 
 function whit2!(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1}, 
-    c::Array{T3,1}, d::Array{T3,1}, e::Array{T3,1}) where{
+    c::Array{T3,1}, d::Array{T3,1}, e::Array{T3,1}; 
+    include_cve = true) where{
         T <: Real, T2 <: Real, T3 <: AbstractFloat}
     
     # int i, i1, i2, m;
@@ -73,5 +76,43 @@ function whit2!(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1},
     @inbounds @fastmath for i in (m-2):-1:1
         z[i] = z[i] / d[i] - c[i] * z[i + 1] - e[i] * z[i + 2];
     end
-    # z
+
+    # c: u1, d: v, e: u2
+    # cve = -990.0
+    cve = ifelse(include_cve, whit2_hat(d, c, e, y, z, w), -999.0)
+    # cve
 end
+
+# according to hat and return the generalized cross validation
+function whit2_hat(v::Array{T, 1}, u1::Array{T, 1}, u2::Array{T, 1}, 
+    y::Array{T2,1}, z::Array{T2, 1}, w::Array{T3,1}) where { T<:AbstractFloat, T2<:AbstractFloat, T3<:AbstractFloat}
+
+    n   = length(v)
+    # T = Float32;
+    s0  = zeros(T, n)
+    s1  = zeros(T, n)
+    s2  = zeros(T, n)
+    # # Compute diagonal of inverse
+    # # params: v, u1, u2, s0, s1, s2
+    @inbounds @fastmath for i = n:-1:1
+        i1 = i + 1
+        i2 = i + 2
+        s0[i] = 1 / v[i]
+        if (i < n) 
+            s1[i] =  - u1[i] * s0[i1]
+            s0[i] = 1 / v[i] - u1[i] * s1[i]
+        end
+        if (i < n - 1) 
+            s1[i] =  - u1[i] * s0[i1] - u2[i] * s1[i1]
+            s2[i] =  - u1[i] * s1[i1] - u2[i] * s0[i2]
+            s0[i] = 1 / v[i] - u1[i] * s1[i] - u2[i] * s2[i]
+        end
+    end
+    # s0
+    r = @. (y - z) * w / (1 - s0)
+    cve = sqrt(sum(r.*r/length(y)))
+end
+
+export whit2, whit2!,
+    whit2_cpp, 
+    whit2_hat

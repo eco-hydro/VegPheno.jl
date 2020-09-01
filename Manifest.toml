@@ -41,21 +41,9 @@ version = "1.0.1"
 
 [[Bzip2_jll]]
 deps = ["Libdl", "Pkg"]
-git-tree-sha1 = "5ccb0770e3d1c185a52e6d36e3ffb830639ed3d2"
+git-tree-sha1 = "03a44490020826950c68005cafb336e5ba08b7e8"
 uuid = "6e34b625-4abd-537c-b88f-471c36dfa7a0"
-version = "1.0.6+3"
-
-[[CSV]]
-deps = ["CategoricalArrays", "DataFrames", "Dates", "Mmap", "Parsers", "PooledArrays", "SentinelArrays", "Tables", "Unicode"]
-git-tree-sha1 = "a390152e6850405a48ca51bd7ca33d11a21d6230"
-uuid = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
-version = "0.7.7"
-
-[[CategoricalArrays]]
-deps = ["DataAPI", "Future", "JSON", "Missings", "Printf", "Statistics", "Unicode"]
-git-tree-sha1 = "a6c17353ee38ddab30e73dcfaa1107752de724ec"
-uuid = "324d7699-5711-5eae-9e2f-1d82baa6b597"
-version = "0.8.1"
+version = "1.0.6+4"
 
 [[ColorSchemes]]
 deps = ["ColorTypes", "Colors", "FixedPointNumbers", "Random", "StaticArrays"]
@@ -74,12 +62,6 @@ deps = ["ColorTypes", "FixedPointNumbers", "InteractiveUtils", "Reexport"]
 git-tree-sha1 = "5639e44833cfcf78c6a73fbceb4da75611d312cd"
 uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
 version = "0.12.3"
-
-[[Compat]]
-deps = ["Base64", "Dates", "DelimitedFiles", "Distributed", "InteractiveUtils", "LibGit2", "Libdl", "LinearAlgebra", "Markdown", "Mmap", "Pkg", "Printf", "REPL", "Random", "SHA", "Serialization", "SharedArrays", "Sockets", "SparseArrays", "Statistics", "Test", "UUIDs", "Unicode"]
-git-tree-sha1 = "a6a8197ae253f2c1a22b2ae17c2dfaf5812c03aa"
-uuid = "34da2185-b29b-5c13-b0c7-acf172513d20"
-version = "3.13.0"
 
 [[Conda]]
 deps = ["JSON", "VersionParsing"]
@@ -103,12 +85,6 @@ version = "0.5.4"
 git-tree-sha1 = "176e23402d80e7743fc26c19c681bfb11246af32"
 uuid = "9a962f9c-6df0-11e9-0e5d-c546b8b5ee8a"
 version = "1.3.0"
-
-[[DataFrames]]
-deps = ["CategoricalArrays", "Compat", "DataAPI", "Future", "InvertedIndices", "IteratorInterfaceExtensions", "Missings", "PooledArrays", "Printf", "REPL", "Reexport", "SortingAlgorithms", "Statistics", "TableTraits", "Tables", "Unicode"]
-git-tree-sha1 = "4fe99dbfb5201c5766d20d32a65209434347fd58"
-uuid = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
-version = "0.21.6"
 
 [[DataStructures]]
 deps = ["InteractiveUtils", "OrderedCollections"]
@@ -152,9 +128,9 @@ version = "0.3.0"
 
 [[FFMPEG_jll]]
 deps = ["Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "LAME_jll", "LibVPX_jll", "Libdl", "Ogg_jll", "OpenSSL_jll", "Opus_jll", "Pkg", "Zlib_jll", "libass_jll", "libfdk_aac_jll", "libvorbis_jll", "x264_jll", "x265_jll"]
-git-tree-sha1 = "1af4493ff9a069e26a538d6f113816b237d3cc37"
+git-tree-sha1 = "13a934b9e74a8722bf1786c989de346a9602e695"
 uuid = "b22a6f82-2f65-5046-a5b2-351ab43fb4e5"
-version = "4.3.1+1"
+version = "4.3.1+2"
 
 [[FileIO]]
 deps = ["Pkg"]
@@ -176,19 +152,15 @@ version = "0.4.1"
 
 [[FreeType2_jll]]
 deps = ["Bzip2_jll", "Libdl", "Pkg", "Zlib_jll"]
-git-tree-sha1 = "158698cb8b27eccc7a0de16b73ca7912e164d88b"
+git-tree-sha1 = "720eee04e3b496c15e5e2269669c2532fb5005c0"
 uuid = "d7e528f0-a631-5988-bf34-fe36492bcfd7"
-version = "2.10.1+3"
+version = "2.10.1+4"
 
 [[FriBidi_jll]]
 deps = ["Libdl", "Pkg"]
-git-tree-sha1 = "94e98e5597e745d9fb3094d89c7b0b754204c9dd"
+git-tree-sha1 = "cfc3485a0a968263c789e314fca5d66daf75ed6c"
 uuid = "559328eb-81f9-559d-9380-de523a88c83c"
-version = "1.0.5+4"
-
-[[Future]]
-deps = ["Random"]
-uuid = "9fa8497b-333b-5362-9e8d-4d0656e87820"
+version = "1.0.5+5"
 
 [[GR]]
 deps = ["Base64", "DelimitedFiles", "HTTP", "JSON", "LinearAlgebra", "Printf", "Random", "Serialization", "Sockets", "Test", "UUIDs"]
@@ -239,12 +211,6 @@ deps = ["AxisAlgorithms", "LinearAlgebra", "OffsetArrays", "Random", "Ratios", "
 git-tree-sha1 = "2b7d4e9be8b74f03115e64cf36ed2f48ae83d946"
 uuid = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
 version = "0.12.10"
-
-[[InvertedIndices]]
-deps = ["Test"]
-git-tree-sha1 = "15732c475062348b0165684ffe28e85ea8396afc"
-uuid = "41ab1584-1d38-5bbf-9106-f11c6c58b48f"
-version = "1.0.0"
 
 [[ItemGraphs]]
 deps = ["LightGraphs"]
@@ -419,12 +385,6 @@ git-tree-sha1 = "0ca3e823caba835d5283fc9112266a4f20f3f713"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 version = "1.5.8"
 
-[[PooledArrays]]
-deps = ["DataAPI"]
-git-tree-sha1 = "b1333d4eced1826e15adbdf01a4ecaccca9d353c"
-uuid = "2dfb63ee-cc39-5dd5-95bd-886bf059d720"
-version = "0.5.3"
-
 [[Printf]]
 deps = ["Unicode"]
 uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
@@ -473,12 +433,6 @@ version = "1.0.1"
 
 [[SHA]]
 uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
-
-[[SentinelArrays]]
-deps = ["Dates", "Random"]
-git-tree-sha1 = "7871163033b83a0d08bb601af56488c6f642a113"
-uuid = "91c51154-3ec4-41a3-a24f-3f23e20d615c"
-version = "1.2.10"
 
 [[Serialization]]
 uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
@@ -576,9 +530,9 @@ version = "0.5.2"
 
 [[Zlib_jll]]
 deps = ["Libdl", "Pkg"]
-git-tree-sha1 = "d5bba6485811931e4b8958e2d7ca3738273ac468"
+git-tree-sha1 = "fdd89e5ab270ea0f2a0174bd9093e557d06d4bfa"
 uuid = "83775a58-1f1d-513f-b197-d71354ab007a"
-version = "1.2.11+15"
+version = "1.2.11+16"
 
 [[libass_jll]]
 deps = ["Bzip2_jll", "FreeType2_jll", "FriBidi_jll", "Libdl", "Pkg", "Zlib_jll"]

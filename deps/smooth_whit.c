@@ -31,16 +31,19 @@ void smooth2(double * w, double * y, double * z, double * lamb, int * mm,
         e[i] = lambda / d[i];
         z[i] = w[i] * y[i] - c[i1] * z[i1] - e[i2] * z[i2];
     };
+    
     i1 = m - 2;
     i2 = m - 3;
     d[m - 1] = w[m - 1] + 5 * lambda - c[i1] * c[i1] * d[i1] - e[i2] * e[i2] * d[i2];
     c[m - 1] = (-2 * lambda - d[i1] * c[i1] * e[i1]) / d[m - 1];
     z[m - 1] = w[m - 1] * y[m - 1] - c[i1] * z[i1] - e[i2] * z[i2];
+    
     i1 = m - 1;
     i2 = m - 2;
     d[m] = w[m] + lambda - c[i1] * c[i1] * d[i1] - e[i2] * e[i2] * d[i2];
     z[m] = (w[m] * y[m] - c[i1] * z[i1] - e[i2] * z[i2]) / d[m];
     z[m - 1] = z[m - 1] / d[m - 1] - c[m - 1] * z[m];
+    
     for (i = m - 2; 0 <= i; i--)
         z[i] = z[i] / d[i] - c[i] * z[i + 1] - e[i] * z[i + 2];
 }

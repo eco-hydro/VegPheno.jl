@@ -1,7 +1,10 @@
 using Dates
 using Printf
 
+# - adj_factor: lambda = lambda_opt / adj_factor
 function smooth_whit(y, qc, date; niters=5, 
+    lambda = nothing,
+    adj_factor = 1.0,
     is_plot = true, title = "whittaker", 
     outfile = "Figures/Plot-smooth_whit.pdf")
     
@@ -12,16 +15,16 @@ function smooth_whit(y, qc, date; niters=5,
     year_min = year_lims[1]
     year_max = year_lims[2]
     nyear = year_max - year_min
-    x_lims = Dates.value.((Date(year_min), Date(year_max)))
+    x_lims = Dates.value.((Date(year_min-1), Date(year_max+1)))
     xticks = @. Date(year_min:year_max, 1, 1)
 
     p = plot_input(date, y, QC_flag, (year_min, year_max))
-    spike_rm!(y, 0.3, x = date, p = p, QC_flag = QC_flag, half_win = 1)
+    # spike_rm!(y, 0.3, x = date, p = p, QC_flag = QC_flag, half_win = 1)
     
     my_cgrad = cgrad([:blue, "yellow", :red])
     plot!(p, xlim = x_lims, legend = :topleft, 
         title = title,
-        size = (70*nyear, 260), palette = my_cgrad)
+        size = (70*nyear + 600, 250), palette = my_cgrad)
 
     ## add curve fitting results into spike.pdf 
     # "#7F7F7F"
@@ -32,10 +35,14 @@ function smooth_whit(y, qc, date; niters=5,
     for i in 1:niters
         # println("outside y: ", sum(y))
         # lambda = lambda_vcurve(y, w, is_plot = false)
-        lambda = lambda_cv(y, w, is_plot = false)
-        yfit, cve = whit2(y, w, lambda)
+        if isnothing(lambda)
+            lambda_i = lambda_cv(y, w, is_plot = false)/adj_factor
+        else 
+            lambda_i = lambda
+        end
+        yfit, cve = whit2(y, w, lambda_i)
         
-        w = wBisquare(y, yfit, w, iter = i, wmin = 0.1, step = 0.3)
+        w = wBisquare(y, yfit, w, iter = i, wmin = 0.05, step = 0.2)
         if is_plot
             # , color = colors[i]
             plot!(p, date, yfit, linewidth = 0.8, label = "iter $i")

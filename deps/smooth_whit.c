@@ -23,7 +23,7 @@ void smooth2(double * w, double * y, double * z, double * lamb, int * mm,
     c[1] = (-4 * lambda - d[0] * c[0] * e[0]) / d[1];
     e[1] = lambda / d[1];
     z[1] = w[1] * y[1] - c[0] * z[0];
-    for (i = 2; i < m - 1; i++) {
+    for (i = 2; i <= m - 2; i++) {
         i1 = i - 1;
         i2 = i - 2;
         d[i] = w[i] + 6 * lambda - c[i1] * c[i1] * d[i1] - e[i2] * e[i2] * d[i2];

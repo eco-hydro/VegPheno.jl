@@ -6,9 +6,6 @@ check_ylu! = clamp!
 #     yfit[ yfit .> ylu[2]] := ylu[2]
 # end
 
-# function smooth_whit()
-# end
-
 # trs = 0.5 # Threshold for growing season
 # iters = 2
 # for i = 1:iters

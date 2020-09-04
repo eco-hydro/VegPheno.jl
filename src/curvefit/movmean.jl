@@ -6,7 +6,6 @@ function movmean(x::AbstractArray{T,1}, halfwin::Integer = 2) where {T <: Real}
     for i = 1:n
         i_begin = i <= halfwin ? 1 : i - halfwin
         i_end = i <= n - halfwin ? i + halfwin : n
-
         # println((i_begin, i_end))
         z[i] = mean(@view x[i_begin:i_end])
     end

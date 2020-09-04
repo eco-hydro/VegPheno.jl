@@ -1,6 +1,6 @@
 # using Random
 
-@testset "GEE pkg_whit.whit2" begin
+@testset "lambda init" begin
     # @examples
     # Random.seed!(1234)
     y = rand(100)

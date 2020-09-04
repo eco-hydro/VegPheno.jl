@@ -25,6 +25,7 @@ include("smooth_whittaker/smooth_whit.jl")
 include("smooth_whittaker/lambda_init.jl")
 include("smooth_whittaker/lambda_cv.jl")
 include("smooth_whittaker/lambda_vcurve.jl")
+include("smooth_whittaker/smooth_SG.jl")
 
 include("weights/wBisquare.jl")
 include("weights/wTSM.jl")

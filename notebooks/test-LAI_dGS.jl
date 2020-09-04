@@ -3,6 +3,7 @@ using DataFramesMeta
 using phenofit
 using Lazy, Query, Pipe
 using Printf
+using Dates
 
 # replace()
 set_value!(x, con, value) = begin
@@ -34,12 +35,9 @@ end
 
 sites = unique(df.site)
 sitename = sites[1]
-
 st = st[match2(sites, st.site), :] |> 
     @filter(_.lat >= 30) |> DataFrame
 sites = st.site
-    
-    
 
 # df |> @filter(_.site == sitename)
 using Plots
@@ -67,7 +65,7 @@ begin
 
     # mat = hcat(res)
     # CSV.write(mat, "flux166_LAI-smoothed.csv")
-    merge_pdf("Figures/*.pdf", "huabei_dGS_Terra-LAI phenofit-v0.1.5.pdf")
+    merge_pdf("Figures/*.pdf", "huabei_dGS_Terra-LAI phenofit-v0.1.6.pdf")
 end
 
 # using FileIO

@@ -25,24 +25,25 @@ function lambda_cv(y, w; is_plot = true)
     opt_lambda = 10^lg_lambdas[k]
     # z = whit2(y, lambda, w)
     if is_plot
-        plot_lambda(lg_lambdas, cvs)
+        plot_lambda(y, w, lg_lambdas, cvs)
     end
     opt_lambda
 end
 
 
 # x: lambdas candidates
-function plot_lambda(x, y)
-    opt_lambda = 10^x[argmin(y)]
+function plot_lambda(y, w, lg_lambdas, cvs)
+    k = argmin(cvs)
+    opt_lambda = 10^lg_lambdas[k]
 
-    p_v = plot(x, y, label = "Generalized CV", frame = :box)
-    scatter!(p_v, x, y, legend = false)
-    scatter!(p_v, [x[k]], [y[k]], 
+    p_v = plot(lg_lambdas, cvs, label = "Generalized CV", frame = :box)
+    scatter!(p_v, lg_lambdas, cvs, legend = false)
+    scatter!(p_v, [lg_lambdas[k]], [cvs[k]], 
         m = (10, :transparent, stroke(1, "red")),
         legend = false)
-    vline!(p_v, [x[k]], color = "red", linestyle = :dash)
+    vline!(p_v, [lg_lambdas[k]], color = "red", linestyle = :dash)
 
-    xlim = (0, 46*6)
+    xlim = (0, length(y))
     p1   = plot(y, xlim = xlim, frame = :box)
     z_2  = whit2(y, w, 2.0)
     z_15 = whit2(y, w, 15.0)

@@ -1,7 +1,7 @@
 """
 Second-order differences Whittaker-Henderson smoothing
 
-whit2(y, w, lambda)
+z, cve = whit2(y, w, lambda)
 whit2(y, w, lambda, z)
 whit2(y, w, lambda, z, c, d, e)
 

@@ -27,18 +27,19 @@ function wBisquare(y::Array{T,1}, yfit::Array{T,1}, w::Array{T2,1};
     re_abs = abs.(re)
     sc     = 6*median(re_abs)
 
-    trs = 0.7
-    trs_high = trs
-    trs_low  = trs
-    println("threshold：high=", trs_high * A + ymin, ", low=", trs_low * A + ymin)
+    trs_high = 0.7
+    trs_low  = 0.4
 
+    # 最保险的方法，获取每年的ylu，然后判断是ingrowing or ungrowing
+    # println("threshold：high=", trs_high * A + ymin, ", low=", trs_low * A + ymin)
     I_bad_high = @.( ((re > 0) & (yfit > trs_high * A + ymin)) ) # middle of GS, upper envelope
     I_bad_low = @.( ((re < 0) & (yfit < trs_low * A + ymin)) )
     I_bad = I_bad_high .| I_bad_low
 
     ## 1.1 坏的点，一窝端。要坏一起坏，重新洗牌，分配权重
     wnew = w; 
-    wnew[I_bad] = @.( (1 - (re_abs[I_bad]/sc)^2)^2 ) # - step
+    # multiply 0.5 make sure bad values have low weight
+    wnew[I_bad] = @.( (1 - (re_abs[I_bad]/sc)^2)^2 * 0.5) # - step
     # wnew2 = @.( (1 - (re_abs[I_bad]/sc)^2)^2 ); # template
     # wnew[I_bad] = wnew[I_bad] .* w[I_bad]
 

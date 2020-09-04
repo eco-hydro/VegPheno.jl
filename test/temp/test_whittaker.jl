@@ -13,8 +13,7 @@ lambda = 2.0
 @testset "whittaker works" begin
     # z_cpp = whit2_cpp(y, w, lambda)
     z_kong = whit2(y, w, lambda)
-    z = whittaker2(y, w, lambda)
-
+    # z = whittaker2(y, w, lambda)
     # @test maximum( abs.(z_cpp - z_kong)) < 1e-5
 end
 # @run 

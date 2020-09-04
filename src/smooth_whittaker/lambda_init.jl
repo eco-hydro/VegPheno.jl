@@ -4,7 +4,7 @@ using Statistics
 """
 Type-2 kurtosis and skewness
 """
-function kurtosis(x::Array{AbstractFloat, 1}) 
+function kurtosis(x::Array{T, 1}) where T <: AbstractFloat
     n = length(x)
     x = x .- mean(x)
     r = n * sum(x.^4)/(sum(x.^2)^2)
@@ -13,7 +13,7 @@ function kurtosis(x::Array{AbstractFloat, 1})
     # r * (1 - 1/n)^2 - 3 # type_3
 end
 
-function skewness(x::Array{AbstractFloat, 1})
+function skewness(x::Array{T, 1}) where T <: AbstractFloat
     n = length(x)
     x = x .- mean(x)
     r = sqrt(n) * sum(x.^3)/(sum(x.^2)^(3/2))
@@ -21,7 +21,7 @@ function skewness(x::Array{AbstractFloat, 1})
     # r * ((1 - 1/n))^(3/2) # type3
 end
 
-function init_lambda(x::Array{AbstractFloat, 1})
+function lambda_init(x::Array{T, 1}) where T <: AbstractFloat
     x_mean = mean(x)
     x_sd = std(x)
 
@@ -32,7 +32,18 @@ function init_lambda(x::Array{AbstractFloat, 1})
     10^lambda
 end
 
-function init_lambda(x::Array{AbstractFloat, 1}, coef::Array{AbstractFloat, 1})
+"""
+Init the Whittaker parameter lambda 
+
+- coef: coefficients in the order of interception, mean, sd, skewness and kurtosis, 
+    e.g. [0.9809, 0.7247, -2.6752, -0.3854, -0.0604].
+
+@examples
+y = rand(100)
+coef = [0.9809, 0.7247, -2.6752, -0.3854, -0.0604];
+lambda_init(y, coef)
+"""
+function lambda_init(x::Array{T, 1}, coef::Array{Float64, 1}) where T <: AbstractFloat
     x_mean = mean(x)
     x_sd = std(x)
 
@@ -45,10 +56,13 @@ function init_lambda(x::Array{AbstractFloat, 1}, coef::Array{AbstractFloat, 1})
     10^lambda
 end
 
+
+export kurtosis, skewness, lambda_init
+
 # x = rand(100)
 # x[3] = missing
-# init_lambda(x)
-# R"phenofit::init_lambda($x)"
+# lambda_init(x)
+# R"phenofit::lambda_init($x)"
 
 # std(x)
 # R"sd($x)"

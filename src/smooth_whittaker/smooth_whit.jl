@@ -2,11 +2,18 @@ using Dates
 using Printf
 
 # - adj_factor: lambda = lambda_opt / adj_factor
-function smooth_whit(y, qc, date; niters=5, 
+
+"""
+
+- options...: other parameters to [wBisquare()]
+"""
+function smooth_whit(y, qc, date; 
+    niters=5, 
     lambda = nothing,
     adj_factor = 1.0,
     is_plot = true, title = "whittaker", 
-    outfile = "Figures/Plot-smooth_whit.pdf")
+    outfile = "Figures/Plot-smooth_whit.pdf", 
+    options...)
     
     w, QC_flag = qc_FparLai(qc, wmid = 0.5, wmax = 0.8)
 
@@ -42,7 +49,7 @@ function smooth_whit(y, qc, date; niters=5,
         end
         yfit, cve = whit2(y, w, lambda_i)
         
-        w = wBisquare(y, yfit, w, iter = i, wmin = 0.05, step = 0.2)
+        w = wBisquare(y, yfit, w; iter = i, wmin = 0.05, options...)
         if is_plot
             # , color = colors[i]
             plot!(p, date, yfit, linewidth = 0.8, label = "iter $i")

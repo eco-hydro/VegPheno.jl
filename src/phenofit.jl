@@ -20,12 +20,14 @@ include("QC/qc_FparLai.jl")
 
 # include("smooth_whittaker/whit2_cpp.jl")
 # include("smooth_whittaker/whittaker2.jl")
-include("smooth_whittaker/whit2.jl")
-include("smooth_whittaker/smooth_whit.jl")
 include("smooth_whittaker/lambda_init.jl")
 include("smooth_whittaker/lambda_cv.jl")
 include("smooth_whittaker/lambda_vcurve.jl")
+include("smooth_whittaker/whit2.jl")
+include("smooth_whittaker/smooth_whit.jl")
+include("smooth_whittaker/GEE_smooth_whit.jl")
 include("smooth_whittaker/smooth_SG.jl")
+
 
 include("weights/wBisquare.jl")
 include("weights/wTSM.jl")

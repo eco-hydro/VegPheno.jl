@@ -1,7 +1,6 @@
-using DataFrames, DataFramesMeta, CSV, TabularDisplay
-using DataFramesMeta
+using DataFrames, CSV
 using phenofit
-using Lazy, Query, Pipe
+using Lazy, Query
 using Printf
 using Dates
 
@@ -59,10 +58,10 @@ begin
     
         y2 = smooth_whit(d[:, :y], d.QC_Extra, d.date; 
             adj_factor = 1,
+            
             outfile = outfile, title = prefix, is_plot = true)
         push!(res, y2)
     end
-
     # mat = hcat(res)
     # CSV.write(mat, "flux166_LAI-smoothed.csv")
     merge_pdf("Figures/*.pdf", "huabei_dGS_Terra-LAI phenofit-v0.1.6.pdf")

@@ -1,8 +1,10 @@
-using DataFrames, DataFramesMeta, CSV, TabularDisplay
-using DataFramesMeta
+using DataFrames, CSV
 using phenofit
-using Lazy, Query, Pipe
+using Lazy, Query
 using Printf
+using Dates
+# TabularDisplay, DataFramesMeta
+# Pipe
 
 # replace()
 set_value!(x, con, value) = begin
@@ -17,21 +19,19 @@ begin
         @mutate(y = _.y/10) |> 
         @replacena(:y => -0.1) |> 
         @replacena(:QC_Extra => 127) |> 
+        @filter(_.date >= Date("2015-01-01")) |> 
         DataFrame
     # df = df |> 
+    df.QC_Extra = convert.(UInt8, df.QC_Extra);
+    set_value!(df.y, df.y .> 10, -0.1)
 end
-
-df.QC_Extra = convert.(UInt8, df.QC_Extra);
 # clamp!(df.y, -1, 10.0);
-set_value!(df.y, df.y .> 10, -0.1)
 # set_value!(df.QC_Extra, )
-
 # df[df.Lai_500m .=== missing, :]
 describe(df) # summary(df)
 
 # df[df.y .=== missing, :Lai_500m] = -10
 # df[df.Lai_500m .=== missing, :Lai_500m] = 0
-
 sites = unique(df.site)
 sitename = sites[1]
 
@@ -50,16 +50,17 @@ for i in 1:length(sites)
     prefix = @sprintf("[%03d_%s]", i, sitename)
     outfile = "Figures/$prefix flux166-LAI.pdf"
     println(outfile)
-    y2 = smooth_whit(d[:, :y], d.QC_Extra, d.date; outfile = outfile, title = prefix)
-
+    y2 = smooth_whit(d[:, :y], d.QC_Extra, d.date; 
+        outfile = outfile, title = prefix, 
+        trs_high = 0.7, trs_low = 0.4, trs_bg = 0.2, 
+        step = 0.3)
     push!(res, y2)
 end
+merge_pdf("Figures/*.pdf", "flux166_Terra-LAI phenofit-v0.1.2.pdf", is_del = true)
 
-mat = hcat(res)
-CSV.write(mat, "flux166_LAI-smoothed.csv")
-
-merge_pdf("Figures/*.pdf", "flux166_Terra-LAI phenofit-v0.1.1.pdf")
-
-using FileIO
-save("LAI_smoothed.jld", Dict("res" => res))
+# using FileIO
+# save("LAI_smoothed.jld", Dict("res" => res))
 # save("LAI_smoothed2.jld", res)
+# 
+# mat = hcat(res)
+# CSV.write(mat, "flux166_LAI-smoothed.csv")

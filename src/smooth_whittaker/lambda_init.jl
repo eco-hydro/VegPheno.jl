@@ -28,7 +28,7 @@ function lambda_init(x::Array{T, 1}) where T <: AbstractFloat
     cv   = x_sd/x_mean
     skew = skewness(x)
     kur  = kurtosis(x)
-    lambda = 0.9809 + 0.7247 * x_mean - 2.6752 * x_sd - 0.3854 * skew - 0.0604 * kur
+    lambda = 0.9809 + 0.7247 * x_mean - 2.6752 * x_sd - 0.3854 * skew - 0.0604 * kur # Terra EVI
     10^lambda
 end
 

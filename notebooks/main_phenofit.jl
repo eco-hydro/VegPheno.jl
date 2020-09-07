@@ -12,7 +12,7 @@ end
 
 Convert "YYYYDDD" to date
 """
-date_doy(x::String = "2020079") = Date(DateTime(AstroTime.UTCEpoch(x, DateFormat("yyyyD"))))
+date_doy(x::String = "2020079") = Date(DateTime(UTCEpoch(x, DateFormat("yyyyD"))))
 
 # ------------------------------------------------------------------------------
 get_value(I, fids) = begin

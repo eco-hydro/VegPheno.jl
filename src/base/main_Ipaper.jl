@@ -65,6 +65,14 @@ function merge_pdf(input, output="Plot.pdf"; is_del = false)
     nothing
 end
 
+
+"""
+    open pdf file in SumatraPDF
+"""
+function show_pdf(file)
+    run(`/mnt/c/WINDOWS/SumatraPDF.exe $file`; wait = false)
+end
+
 # # import PyCall
 # # PyPlot
 # # pdf = PyCall.pyimport("matplotlib.backends.backend_pdf")
@@ -77,4 +85,11 @@ end
 # end
 get_dn(date, days = 8) = fld.(Dates.dayofyear.(date) .- 1, days) .+ 1
 
-export match2, split, str_extract, list_dir, CartesianIndex2Int, merge_pdf, get_dn
+set_value!(x, con, value) = begin
+    x[con] .= value
+    Nothing
+end
+
+
+export match2, split, str_extract, list_dir, CartesianIndex2Int, merge_pdf, show_pdf, get_dn, 
+    set_value!

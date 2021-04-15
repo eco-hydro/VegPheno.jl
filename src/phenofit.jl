@@ -13,9 +13,8 @@ export  whittaker2,
 
 include("base/main_Ipaper.jl")
 
-include("raster/raster.jl")
-include("raster/ncread2.jl")
-
+# include("raster/raster.jl")
+# include("raster/ncread2.jl")
 include("QC/qc_FparLai.jl")
 
 # include("smooth_whittaker/whit2_cpp.jl")

@@ -32,9 +32,7 @@ function lambda_vcurve(y, w; is_plot = true)
     k = argmin(v)
     opt_lambda = 10^lamids[k]
     # z = whit2(y, lambda, w)
-    if is_plot
-        plot_lambda(y, w, lamids, v)
-    end
+    if is_plot; plot_lambda(y, w, lamids, v) |> display; end
     opt_lambda
 end
 

@@ -23,10 +23,7 @@ function lambda_cv(y, w; is_plot = true)
     # lamids = (lg_lambdas[2:end] + lg_lambdas[1:end-1])/2
     k = argmin(cvs)
     opt_lambda = 10^lg_lambdas[k]
-    # z = whit2(y, lambda, w)
-    if is_plot
-        plot_lambda(y, w, lg_lambdas, cvs)
-    end
+    if is_plot; plot_lambda(y, w, lg_lambdas, cvs) |> display; end
     opt_lambda
 end
 
@@ -45,14 +42,13 @@ function plot_lambda(y, w, lg_lambdas, cvs)
 
     xlim = (0, length(y))
     p1   = plot(y, xlim = xlim, frame = :box)
-    z_2  = whit2(y, w, 2.0)
-    z_15 = whit2(y, w, 15.0)
-    z_opt = whit2(y, w, opt_lambda)
+    z_2,  = whit2(y, w, 2.0)
+    z_15, = whit2(y, w, 15.0)
+    z_opt, = whit2(y, w, opt_lambda)
     plot!(p1, z_2, label = "lambda = 2")
     plot!(p1, z_15, label = "lambda = 15")
     plot!(p1, z_opt, label = "lambda = $(round(opt_lambda, digits = 3))")
     plot(p_v, p1, layout = (1, 2), size = (700, 480))
 end
-
 
 export lambda_cv, plot_lambda

@@ -10,7 +10,7 @@ function plot_input(date, val, QC_flag, year_lims = (2000, 2010); base_size = 4.
     qc_shape    = [:circle, :rect, :xcross, :dtriangle, :dtriangle, :utriangle]
     qc_colors   = ["grey60", "#00BFC4", "#F8766D", "#C77CFF", "#B79F00", "#C77CFF"]
     qc_size     = [0.5, 0.5, 0.5, 0, 0, 0] .+ base_size
-
+    
     year_min = year_lims[1]
     year_max = year_lims[2]
     x_lims = Dates.value.((Date(year_min), Date(year_max)))

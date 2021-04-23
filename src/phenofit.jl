@@ -1,6 +1,7 @@
 module phenofit
 
 using Plots
+using JLD2
 
 export  whittaker2,
         whittaker2!, 
@@ -24,7 +25,7 @@ include("smooth_whittaker/lambda_cv.jl")
 include("smooth_whittaker/lambda_vcurve.jl")
 include("smooth_whittaker/whit2.jl")
 include("smooth_whittaker/smooth_whit.jl")
-include("smooth_whittaker/GEE_smooth_whit.jl")
+include("smooth_whittaker/smooth_whit_GEE.jl")
 include("smooth_whittaker/smooth_SG.jl")
 
 

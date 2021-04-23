@@ -61,6 +61,5 @@ merge_pdf("Figures/*.pdf", "flux166_Terra-LAI phenofit-v0.1.2.pdf", is_del = tru
 # using FileIO
 # save("LAI_smoothed.jld", Dict("res" => res))
 # save("LAI_smoothed2.jld", res)
-# 
 # mat = hcat(res)
 # CSV.write(mat, "flux166_LAI-smoothed.csv")

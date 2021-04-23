@@ -31,8 +31,7 @@ function wBisquare(y::Array{T,1}, yfit::Array{T,1}, w::Array{T2,1};
     re_abs = abs.(re)
     # println("re: $re")
     sc     = 6*median(re_abs)
-
-    println("sc", median(re_abs), ", ", sc)
+    # println("sc", median(re_abs), ", ", sc)
     # 最保险的方法，获取每年的ylu，然后判断是ingrowing or ungrowing
     # println("threshold：high=", trs_high * A + ymin, ", low=", trs_low * A + ymin)
     y_grow = trs_high * A + ymin

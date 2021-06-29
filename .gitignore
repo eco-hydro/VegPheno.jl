@@ -16,6 +16,9 @@
 *.png
 *.pdf
 Figures/
+scripts/
 
 *.md
 *.docx
+
+*.json

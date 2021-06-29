@@ -22,7 +22,7 @@ function whit2(y::Array{T,1}, w::Array{T2,1}, lambda::Float64; include_cve = tru
     # return z
 end
 
-function whit2(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1}; include_cve = true) where{
+function whit2!(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1}; include_cve = true) where{
     T <: Real, T2 <: Real }
 
     m = length(y)
@@ -30,7 +30,7 @@ function whit2(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1}; in
     d = zeros(Float32, m)
     e = zeros(Float32, m)
     cve = whit2!(y, w, lambda, z, c, d, e, include_cve = include_cve)
-    z, cve
+    cve
 end
 
 function whit2!(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1}, 
@@ -76,7 +76,6 @@ function whit2!(y::Array{T,1}, w::Array{T2,1}, lambda::Float64, z::Array{T,1},
     d[m] = w[m] + lambda - c[i1] * c[i1] * d[i1] - e[i2] * e[i2] * d[i2];
     z[m] = (w[m] * y[m] - c[i1] * z[i1] - e[i2] * z[i2]) / d[m];
     z[m - 1] = z[m - 1] / d[m - 1] - c[m - 1] * z[m];
-    
     
     # for (i = m - 2; 0 <= i; i--)
     @inbounds @fastmath for i in (m-2):-1:1

@@ -1,4 +1,6 @@
-# using phenofit
+using phenofit
+using Test
+
 @testset "Savitzky Golay filter" begin
     y = [1.0, 2, 5, 4, 3, 6]
     w = collect(1:7)
@@ -10,6 +12,16 @@
 
     @test z ≈ y
 end
+
+y = rand(100)
+w = rand(100)
+@time z1 = SG(y, 5)
+@time z2 = SG(y, w, 5)
+
+# using Plots
+# p = plot(y)
+# plot!(p, z1)
+# plot!(p, z2)
 
 # n = Int(1e5)
 # y = rand(n)

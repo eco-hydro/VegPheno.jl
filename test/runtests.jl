@@ -6,7 +6,7 @@ using Test
 
 # cd(dirname(@__FILE__)) do
     include("test-smooth_whit.jl")
-    # include("test-smooth_SG.jl")
+    include("test-smooth_SG.jl")
     include("test_wTSM.jl")
     # include("test_whittaker.jl")
     include("test-lambda_init.jl")

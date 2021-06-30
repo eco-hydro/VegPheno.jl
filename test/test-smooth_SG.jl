@@ -8,21 +8,23 @@ using Test
     S = sgmat_S(halfwin)
     B = sgmat_B(S)
     sgmat_wB(S, w)
-    z = SG(y, 1, 2)
+    z = SG(y; halfwin=1)
 
     @test z ≈ y
 end
 
-y = rand(100)
-w = rand(100)
-@time z1 = SG(y, 5)
-@time z2 = SG(y, w, 5)
+
+@testset "Savitzky Golay filter" begin
+    y = rand(100)
+    w = rand(100)
+    SG(y; halfwin=5)
+    wSG(y, w; halfwin=5)    
+end
 
 # using Plots
 # p = plot(y)
 # plot!(p, z1)
 # plot!(p, z2)
-
 # n = Int(1e5)
 # y = rand(n)
 # using BenchmarkTools

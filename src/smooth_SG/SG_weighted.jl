@@ -60,4 +60,31 @@ function wSG(y::Array{T, 1}, w::Array{T2, 1}; halfwin=1, d=2) where {T <: Real, 
     [y_head; y_mid; y_tail]
 end
 
-export mod_SG, wSG
+# weighted Savitzky Golay filter
+function wSG_low(y::Array{T, 1}, w::Array{T2, 1}; halfwin=1, d=2) where {T <: Real, T2 <: Real}
+    # constrain the w_min, unless it will lead to matrix division erorr
+    w = deepcopy(w) 
+    w[w .< 1e-4] .= 1e-4
+
+    n = length(y)
+    frame = halfwin*2 + 1;
+    if (sum(w) == n); return SG(y; halfwin=halfwin, d=d); end
+
+    S = sgmat_S(halfwin, d);
+    smat = ones(T2, size(S));
+    
+    B = sgmat_wB(S, w[1:frame], smat);
+    y_head = @views(B[1:halfwin+1, :] * y[1:frame])[:, 1];
+
+    y_mid = zeros(T, n - frame - 1)
+    @inbounds for i = 1:n-frame-1
+        B = sgmat_wB(S, w[i+1:i+frame], smat);
+        y_mid[i] = dot( @view(B[halfwin+1, :]), @view y[i+1:i+frame] );
+    end
+
+    B = sgmat_wB(S, w[n-frame+1:n], smat);
+    y_tail = @views( B[halfwin+1:frame, :] * y[n-frame+1:n])[:, 1];
+    [y_head; y_mid; y_tail]
+end
+
+export wSG, wSG_low

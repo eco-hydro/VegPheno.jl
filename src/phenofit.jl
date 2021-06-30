@@ -27,8 +27,7 @@ include("smooth_whittaker/whit2.jl")
 include("smooth_whittaker/smooth_whit.jl")
 include("smooth_whittaker/smooth_whit_GEE.jl")
 # include("smooth_whittaker/smooth_SG.jl")
-include("smooth_whittaker/SG.jl")
-include("smooth_whittaker/SG_V2.jl")
+include("smooth_SG/smooth_SG.jl")
 
 include("season/findpeaks.jl")
 

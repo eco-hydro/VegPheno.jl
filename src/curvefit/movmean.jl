@@ -37,6 +37,5 @@ export movmean, weightedMean
 # w = ones(length(x))
 
 # t_weighted = @benchmark movmean(x, w, 2)
-# using BenchmarkTools
 # # @benchmark movmean(x)
 # @benchmark movmean(x, 2)

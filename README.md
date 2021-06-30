@@ -18,8 +18,8 @@ Pkg.add(url = "https://github.com/kongdd/phenofit.jl")
 
 ## Tasklist 
 
-- [x] Whittaker-Henderson smoothing and interpolation
-- [x] Savitzky Golay filter (2020-09-04)
+- [x] weighted Whittaker-Henderson smoothing and interpolation
+- [x] weighted Savitzky Golay filter
 - [ ] HANTS
 - [ ] Double Logistics
 - [ ] Growing season dividing

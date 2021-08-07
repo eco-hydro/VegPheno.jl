@@ -1,6 +1,7 @@
 module phenofit
 
-using StaticArrays: zeros
+using Base: Float64
+using StaticArrays: zeros, maximum
 using Dates: floor, length
 using Plots
 # using JLD2

@@ -8,7 +8,6 @@ using Plots
 using Pkg
 pyplot()
 
-"hello"
 begin
     st = DataFrame(CSV.File("/mnt/n/Research/GEE_repos/gee_whittaker/temp/st-doubleGrowingSeason_st190.csv"))
     df = DataFrame(CSV.File("/mnt/n/Research/GEE_repos/gee_whittaker/temp/df-doubleGrowingSeason_st190.csv"))

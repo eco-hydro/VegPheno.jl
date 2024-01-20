@@ -6,14 +6,14 @@ using Dates: floor, length
 using Plots
 # using JLD2
 
-export  whittaker2,
-        whittaker2!, 
-        smooth2!, 
-        smooth2_c!, 
-        wTSM, 
-        wBisquare
-        # whittaker1,
-        # whittaker1!,
+export whittaker2,
+  whittaker2!,
+  smooth2!,
+  smooth2_c!,
+  wTSM,
+  wBisquare
+# whittaker1,
+# whittaker1!,
 
 # include("base/main_Ipaper.jl")
 

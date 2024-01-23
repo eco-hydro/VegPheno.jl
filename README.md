@@ -1,9 +1,10 @@
-# phenofit in Julia
+# VegPheno.jl: phenofit in Julia
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://kongdd.github.io/phenofit.jl/stable)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://kongdd.github.io/phenofit.jl/dev)
-[![Codecov](https://codecov.io/gh/kongdd/phenofit.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/kongdd/phenofit.jl)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://eco-hydro.github.io/VegPheno.jl/dev)
+[![CI](https://github.com/eco-hydro/VegPheno.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/eco-hydro/VegPheno.jl/actions/workflows/CI.yml)
+[![Codecov](https://codecov.io/gh/eco-hydro/VegPheno.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/eco-hydro/VegPheno.jl/tree/master)
 
+> Dongdong Kong
 > Dongdong Kong
 
 This package provides implementations for smoothing algorithm for remote sensing vegetation indexes.
@@ -11,7 +12,7 @@ This package provides implementations for smoothing algorithm for remote sensing
 # Installation
 ```
 using Pkg
-Pkg.add(url = "https://github.com/kongdd/phenofit.jl")
+Pkg.add(url = "https://github.com/eco-hydro/VegPheno.jl")
 ```
 
 ## Tasklist 
@@ -30,7 +31,3 @@ Pkg.add(url = "https://github.com/kongdd/phenofit.jl")
 [2]   **Kong, D.**, Zhang, Y., Gu, X., & Wang, D. (2019). A robust method for reconstructing global MODIS EVI time series on the Google Earth Engine. **ISPRS Journal of Photogrammetry and Remote Sensing**, 155, 13–24. (**Q1,** **IF=7.319**)
 
 [3]   Zhang, Q.\*, **Kong, D.\***, Shi, P., Singh, V.P., Sun, P., 2018. Vegetation phenology on the Qinghai-Tibetan Plateau and its response to climate change (1982–2013). **Agricultural and Forest Meteorology**. 248, 408-417. (**Q1**，****IF=4.189****）
-
-<!-- ```bash
-wc -l src/*/*
-``` -->

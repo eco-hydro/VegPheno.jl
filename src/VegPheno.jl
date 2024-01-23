@@ -3,7 +3,7 @@ module VegPheno
 using Base: Float64
 using StaticArrays: zeros, maximum
 using Dates: floor, length
-using Plots
+# using Plots
 # using JLD2
 
 export wTSM, wBisquare

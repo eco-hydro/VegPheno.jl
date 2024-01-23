@@ -1,4 +1,4 @@
-name = "phenofit"
+name = "VegPheno"
 uuid = "123bb0d4-1547-4711-8eb7-d4247b1bccc6"
 authors = ["Dongdong Kong <kongdd@users.noreply.github.com>"]
 version = "0.1.0"
